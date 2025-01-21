@@ -3,8 +3,22 @@
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Copy, Github } from "lucide-react";
 import React, { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Home() {
+  const [copied, setCopied] = useState(false);
+  const { toast } = useToast();
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText("npm i -g @easynext/cli");
+    setCopied(true);
+    toast({
+      title: "Copied to clipboard",
+      description: "The command has been copied to your clipboard",
+    });
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <div className="min-h-screen flex">
       <div className="flex flex-col p-5 md:p-8 space-y-4">
@@ -21,15 +35,21 @@ export default function Home() {
             variant="secondary"
             size="lg"
             className="gap-2 w-fit rounded-full px-5 border border-black"
+            onClick={handleCopy}
           >
-            npm i -g @easynext/cli <Copy className="w-4 h-4" />
+            {copied ? "Copied to clipboard!" : "npm i -g @easynext/cli"}{" "}
+            {copied ? (
+              <CheckCircle className="w-4 h-4" />
+            ) : (
+              <Copy className="w-4 h-4" />
+            )}
           </Button>
           <Button
             asChild
             size="lg"
             className="gap-2 w-fit rounded-full px-5 border border-black"
           >
-            <a href="https://github.com/easynextjs">
+            <a href="https://github.com/easynextjs/easynext" target="_blank">
               <Github className="w-4 h-4" />
               GitHub
             </a>
