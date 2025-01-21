@@ -14,7 +14,7 @@ export default function Home() {
           <br /> with Cursor
         </h1>
         <p className="text-lg text-muted-foreground">
-          Get Highest quality template for your Next.js project
+          Get Pro-created Next.js bootstrap just in seconds
         </p>
         <div className="flex items-center gap-2">
           <Button
